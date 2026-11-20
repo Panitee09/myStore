@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Workshop ร้านยาจำลอง</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#eaf8ff; --card:#ffffff; --text:#1f2937; --muted:#5b6472; --accent:#12b350; }
+  * { box-sizing:border-box; }
+  body { margin:0; color:var(--text); font:400 16px/1.6 'Noto Sans Thai',sans-serif; min-height:100vh;
+         background:radial-gradient(circle at 12% 8%,#ffe9a8 0 90px,transparent 91px),
+                    radial-gradient(circle at 92% 22%,#ffd0e0 0 70px,transparent 71px),
+                    radial-gradient(circle at 8% 88%,#c9f5d9 0 110px,transparent 111px), var(--bg); }
+  main { max-width:640px; margin:0 auto; padding:24px 16px 48px; }
+  .hero { display:flex; align-items:center; gap:12px; margin-bottom:22px; }
+  .hero svg { width:104px; height:104px; flex:none; animation:bob 2.4s ease-in-out infinite; }
+  @keyframes bob { 50% { transform:translateY(-6px) rotate(-3deg); } }
+  @media (prefers-reduced-motion:reduce){ .hero svg{ animation:none; } }
+  h1 { font-size:1.5rem; margin:0; }
+  .muted { color:var(--muted); }
+  .bubble { position:relative; background:#fff; border:3px solid #1f2937; border-radius:22px; padding:10px 16px; box-shadow:4px 4px 0 #1f2937; }
+  .bubble::before { content:''; position:absolute; left:-13px; top:50%; margin-top:-9px; border:9px solid transparent; border-right-color:#1f2937; border-left:0; }
+  .menu { display:grid; gap:16px; }
+  .btn { display:flex; align-items:center; gap:12px; min-height:72px; padding:12px 16px; color:var(--text); text-decoration:none;
+         background:color-mix(in srgb, var(--c1) 22%, #fff); border-radius:24px; border:3px solid #1f2937; box-shadow:5px 5px 0 #1f2937; transition:transform .12s, box-shadow .12s; }
+  .btn:hover, .btn:focus-visible { transform:translate(2px,2px); box-shadow:3px 3px 0 #1f2937; outline:none; }
+  .btn:focus-visible { outline:3px solid #1f2937; outline-offset:3px; }
+  .btn svg { width:68px; height:68px; flex:none; }
+  .btn strong { display:block; font-size:1.15rem; }
+  .btn .desc { color:#374151; font-size:.92rem; }
+  .say { margin-top:6px; background:#fff; border-radius:14px; padding:4px 12px; font-size:.95rem; border:2px dashed color-mix(in srgb, var(--c1) 70%, #1f2937); }
+  .note { margin-top:28px; color:var(--muted); font-size:.9rem; text-align:center; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!-- ตัวการ์ตูน "น้องแคปซูล": สีตัวเปลี่ยนได้ด้วย --c1 และ --c2 -->
+  <symbol id="mascot" viewBox="0 0 100 100">
+    <g transform="rotate(-20 50 50)">
+      <path d="M50 14h-10a26 26 0 0 0 0 72h10z" fill="var(--c1,#22c55e)" stroke="#1f2937" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M50 14h10a26 26 0 0 1 0 72h-10z" fill="var(--c2,#fff)" stroke="#1f2937" stroke-width="2.5" stroke-linejoin="round"/>
+      <rect x="22" y="22" width="9" height="30" rx="4.5" fill="#fff" opacity=".35"/>
+    </g>
+    <circle cx="40" cy="48" r="5" fill="#1f2937"/><circle cx="60" cy="48" r="5" fill="#1f2937"/>
+    <circle cx="41.8" cy="46.2" r="1.7" fill="#fff"/><circle cx="61.8" cy="46.2" r="1.7" fill="#fff"/>
+    <ellipse cx="33" cy="58" rx="5" ry="3" fill="#ff8fa3" opacity=".8"/><ellipse cx="67" cy="58" rx="5" ry="3" fill="#ff8fa3" opacity=".8"/>
+    <path d="M43 59q7 8 14 0" stroke="#1f2937" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </symbol>
+</svg>
+<main>
+  <div class="hero">
+    <svg viewBox="0 0 100 100" role="img" aria-label="น้องแคปซูล"><use href="#mascot"/></svg>
+    <div class="bubble"><h1>สวัสดีจ้า! ฉันน้องแคปซูล</h1><div class="muted">วันนี้อยากทำอะไรดี? เลือกปุ่มด้านล่างได้เลย</div></div>
+  </div>
+  <nav class="menu" id="menu" aria-label="เมนูหลัก"></nav>
+  <p class="note">ข้อมูลทั้งหมดเป็นข้อมูลจำลอง ห้ามใส่ชื่อผู้ป่วยจริง</p>
+</main>
+<script>
+  // รายการลิงก์: เพิ่มหรือลบได้ด้วยการแก้หนึ่งบรรทัดต่อหนึ่งปุ่ม
+  // c1/c2 = สีตัวการ์ตูนของปุ่มนั้น, say = คำอธิบายที่ตัวการ์ตูนพูด
+  const LINKS = [
+    { href:'pos.html',       title:'หน้าขายยา',            desc:'เลือกยา กรอกจำนวน บันทึกการจ่ายยา',                  c1:'#22c55e', c2:'#ffffff', say:'เริ่มที่นี่เลย! เลือกยา ใส่จำนวน แล้วกดขาย ระบบเลือกล็อตให้เอง' },
+    { href:'admin.html',     title:'จัดการระบบ (ผู้ดูแล)', desc:'บัญชียา คลังรายล็อต รายการจ่าย ต้องใช้รหัสผู้ดูแล',   c1:'#ffa42b', c2:'#ffffff', say:'สำหรับผู้ดูแลเท่านั้นนะ ต้องมีรหัสก่อนเข้า' },
+    { href:'dashboard.html', title:'Dashboard คลังยา',     desc:'ภาพรวมคลัง ล็อตใกล้หมดอายุ ยาต่ำกว่าจุดสั่งซื้อ',     c1:'#38bdf8', c2:'#ffffff', say:'ดูภาพรวมคลังและยาที่ใกล้หมดอายุได้ที่นี่' },
+    { href:'status.html',    title:'ตรวจสถานะระบบ',        desc:'ตรวจว่าการเชื่อมต่อแต่ละส่วนทำงานปกติ',              c1:'#ff6b9a', c2:'#ffffff', say:'ระบบรวนไหม? มากดตรวจกันเถอะ' }
+  ];
+  // สร้างปุ่มด้วย textContent (ไม่ใช้ innerHTML กับข้อความจากอาร์เรย์)
+  const NS = 'http://www.w3.org/2000/svg';
+  const menu = document.getElementById('menu');
+  LINKS.forEach(l => {
+    const a = document.createElement('a'); a.className = 'btn'; a.href = l.href;
+    a.style.setProperty('--c1', l.c1); a.style.setProperty('--c2', l.c2);
+    const svg = document.createElementNS(NS, 'svg'); svg.setAttribute('viewBox', '0 0 100 100'); svg.setAttribute('aria-hidden', 'true');
+    const use = document.createElementNS(NS, 'use'); use.setAttribute('href', '#mascot'); svg.appendChild(use);
+    const box = document.createElement('div');
+    const t = document.createElement('strong'); t.textContent = l.title;
+    const d = document.createElement('span'); d.className = 'desc'; d.textContent = l.desc;
+    const s = document.createElement('div'); s.className = 'say'; s.textContent = '💬 ' + l.say;
+    box.append(t, d, s); a.append(svg, box); menu.appendChild(a);
+  });
+</script>
+</body>
+</html>
