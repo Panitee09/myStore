@@ -6,38 +6,38 @@
   <title>Dashboard จัดการคลังยา วันหมดอายุ การสั่งซื้อ และการจ่ายยา</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Mali:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
   <style>
     :root {
-      --ink: #000000;
+      --ink: #4a3558;
       --canvas: #ffffff;
       --inverse-canvas: #000000;
       --inverse-ink: #ffffff;
-      --hairline: #e6e6e6;
-      --hairline-soft: #f1f1f1;
-      --surface-soft: #f7f7f5;
-      --block-lime: #dceeb1;
-      --block-lilac: #c5b0f4;
-      --block-cream: #f4ecd6;
-      --block-mint: #c8e6cd;
-      --block-pink: #efd4d4;
-      --block-coral: #f3c9b6;
-      --block-navy: #1f1d3d;
-      --accent-magenta: #ff3d8b;
-      --semantic-success: #1ea64a;
-      --semantic-danger: #d9383a;
-      --semantic-warn: #c77700;
+      --hairline: #f6d3e4;
+      --hairline-soft: #f9e1ec;
+      --surface-soft: #fff3f8;
+      --block-lime: #e3f6b8;
+      --block-lilac: #e0d6ff;
+      --block-cream: #fff0b8;
+      --block-mint: #bdf0d8;
+      --block-pink: #ffd0e2;
+      --block-coral: #ffd2bd;
+      --block-navy: #2d2142;
+      --accent-magenta: #ff6fa3;
+      --semantic-success: #177a52;
+      --semantic-danger: #c2334d;
+      --semantic-warn: #a35a00;
       --bg: var(--canvas);
       --surface: var(--canvas);
       --surface-subtle: var(--surface-soft);
       --border: var(--hairline);
-      --border-strong: #d4d4d4;
+      --border-strong: #e7b9d1;
       --text-main: var(--ink);
-      --text-secondary: rgba(0, 0, 0, 0.75);
-      --text-muted: rgba(0, 0, 0, 0.56);
-      --radius-lg: 16px;
-      --radius-md: 12px;
+      --text-secondary: rgba(74, 53, 88, 0.85);
+      --text-muted: rgba(74, 53, 88, 0.7);
+      --radius-lg: 24px;
+      --radius-md: 18px;
       --radius-sm: 8px;
     }
 
@@ -740,6 +740,152 @@
     .source-status.source-ok { background: var(--block-mint); color: #000; border: 1px solid var(--semantic-success); }
     .source-status.source-fallback { background: #ffe58a; color: #000; border: 1px solid var(--semantic-warn); border-radius: 10px; display: block; }
     .source-status.source-wait { background: var(--surface-soft, #f7f7f5); color: var(--text-muted); border: 1px solid var(--hairline, #e6e6e6); }
+
+    /* ===================== ธีมน่ารัก (cute cartoon) ===================== */
+    :root {
+      --pink-d: #ff6fa3;
+      --pink-s: #ff8fb8;
+      --sky: #c9e7ff;
+      --lemon: #fff0a8;
+      --font-cute: 'Mali', 'Prompt', system-ui, sans-serif;
+      --shadow-pop: 0 5px 0 rgba(231, 185, 209, .6), 0 12px 22px rgba(255, 143, 184, .14);
+    }
+    body {
+      background-color: #fff6fa;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg stroke='none'%3E%3Cpath d='M24 30l3 7 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1z' fill='%23ffe27a'/%3E%3Cpath d='M118 112c-6-6-14 2-8 9l8 8 8-8c6-7-2-15-8-9z' fill='%23ffc2da'/%3E%3Ccircle cx='120' cy='28' r='5' fill='%23c9e7ff'/%3E%3Ccircle cx='42' cy='118' r='4' fill='%23bdf0d8'/%3E%3Crect x='70' y='64' width='22' height='10' rx='5' fill='%23e6dcff' transform='rotate(-30 81 69)'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    h1, h2, h3, .card-title, .mode-title, .kpi-value, .brand h1 { font-family: var(--font-cute); color: inherit; }
+    .kpi-value { letter-spacing: 0; }
+
+    @keyframes bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-5px) rotate(2deg); } }
+    @keyframes pop { from { transform: translateY(8px) scale(.98); opacity: 0; } to { transform: none; opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .brand-icon, .mode-view.active, .kpi-card, .btn-pill, .nav-link { animation: none !important; transition: none !important; }
+    }
+
+    /* Topbar */
+    .topbar {
+      background: linear-gradient(135deg, #ffe3ef 0%, #fff0c9 55%, #d9f4ff 100%);
+      border-bottom: 4px dashed var(--pink-s);
+      border-radius: 0 0 32px 32px;
+      box-shadow: 0 6px 0 rgba(231, 185, 209, .45);
+      overflow: hidden;
+    }
+    .topbar::before {
+      content: ""; position: absolute; width: 170px; height: 170px; right: -50px; top: -70px;
+      border-radius: 50%; background: rgba(255, 255, 255, .55); pointer-events: none;
+    }
+    .topbar-inner { position: relative; z-index: 1; }
+    .brand-icon {
+      width: 72px; height: 72px; border: none; background: transparent; border-radius: 0;
+      animation: bob 3s ease-in-out infinite;
+    }
+    .brand-icon svg { width: 100%; height: 100%; display: block; }
+    .brand h1 { font-size: 1.3rem; font-weight: 700; color: var(--ink); }
+    .brand p { color: var(--text-secondary); }
+
+    /* Nav + ปุ่ม */
+    .page-nav { background: #fff; border: 2px solid var(--border-strong); box-shadow: 0 3px 0 var(--border-strong); }
+    .nav-link { font-family: var(--font-cute); font-weight: 600; }
+    .nav-link:hover { background: var(--lemon); color: var(--ink); }
+    .nav-link.active { background: var(--pink-s); color: #3d1230; box-shadow: inset 0 0 0 2px var(--ink); }
+    .btn-pill {
+      font-family: var(--font-cute); font-weight: 700; border: 2px solid var(--ink);
+      background: var(--pink-s); color: #3d1230; box-shadow: 0 4px 0 var(--ink);
+      transition: transform .08s ease, box-shadow .08s ease, background-color .12s ease;
+    }
+    .btn-pill:hover { opacity: 1; background: #ff9fc2; transform: translateY(-2px); box-shadow: 0 6px 0 var(--ink); }
+    .btn-pill:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
+    .btn-outline { background: #fff; color: var(--ink); border: 2px solid var(--ink); }
+    .btn-outline:hover { background: var(--lemon); border-color: var(--ink); }
+    .btn-pill:focus-visible, .nav-link:focus-visible, .mode-btn:focus-visible, .preset-btn:focus-visible {
+      outline: 3px solid var(--sky); outline-offset: 3px;
+    }
+
+    /* Mode switcher */
+    .mode-switcher-wrap { background: #fff; border: 3px solid var(--border-strong); border-radius: 26px; box-shadow: var(--shadow-pop); padding: 8px; }
+    .mode-btn { color: var(--ink); border-radius: 18px; border: 2px solid transparent; }
+    .mode-btn:hover { color: var(--ink); background: var(--lemon); }
+    .mode-btn.active { background: var(--pink-s); color: #3d1230; border-color: var(--ink); box-shadow: 0 3px 0 var(--ink); }
+    .mode-num { background: var(--block-lilac); color: var(--ink); border: 2px solid var(--ink); border-radius: 50%; font-family: var(--font-cute); }
+    .mode-sub { opacity: .85; }
+
+    /* Loader / time bar / banner */
+    .loader-bar { border: 3px dashed var(--pink-s); border-radius: 24px; background: #fff; }
+    .loader-bar.dragover { border-color: var(--ink); background: var(--block-lime); }
+    .file-chip { border: 2px solid var(--border-strong); }
+    .file-chip.loaded { border-color: var(--semantic-success); background: var(--block-mint); }
+    .time-bar { border: 3px solid var(--border); border-radius: 24px; box-shadow: var(--shadow-pop); }
+    .time-label { font-family: var(--font-cute); color: var(--ink); }
+    .input-ctrl, .select-ctrl { border: 2px solid var(--border-strong); border-radius: 14px; padding: 7px 12px; background: #fff; color: var(--text-main); }
+    .input-ctrl:focus, .select-ctrl:focus { border-color: var(--pink-d); outline: 3px solid var(--sky); outline-offset: 1px; }
+    .preset-btn { border: 2px solid var(--border-strong); background: #fff; font-weight: 500; }
+    .preset-btn:hover { background: var(--lemon); border-color: var(--ink); }
+    .preset-btn.active { background: var(--pink-s); color: #3d1230; border-color: var(--ink); box-shadow: 0 2px 0 var(--ink); }
+    .mode-banner { border: 3px solid var(--ink); border-radius: 24px; box-shadow: 0 5px 0 var(--ink); }
+    .mode-banner h2 { font-size: 1.1rem; }
+    #view-stock .mode-banner h2::before { content: "📦 "; }
+    #view-procurement .mode-banner h2::before { content: "🛒 "; }
+    #view-dispense .mode-banner h2::before { content: "💊 "; }
+    #view-catalog .mode-banner h2::before { content: "📒 "; }
+    .audience-pill { border: 2px solid var(--ink); background: #fff; }
+
+    /* KPI & cards */
+    .kpi-card, .card { border: 3px solid var(--border); border-radius: 26px; box-shadow: var(--shadow-pop); }
+    .kpi-card.clickable:hover { transform: translateY(-3px) rotate(-.4deg); border-color: var(--pink-d); }
+    .kpi-accent { height: 8px; border-bottom: 2px solid var(--ink); }
+    .kpi-icon { border-radius: 50%; background: var(--block-cream); border: 2px solid var(--border-strong); }
+    .card-title { font-weight: 700; }
+
+    /* Tables */
+    .table-wrap { border: 2px solid var(--border); border-radius: 20px; }
+    thead th { background: var(--block-lilac); color: var(--ink); font-weight: 700; border-bottom: 2px solid var(--border-strong); }
+    tbody td { border-bottom: 1px dashed var(--border); }
+    tbody tr:nth-child(even) { background: #fffafc; }
+    tbody tr:hover { background: var(--hover-soft, #fff3d9); }
+    .pill { border: 2px solid var(--border-strong); font-weight: 600; }
+    .pill-ok { border-color: #6fcfa0; }
+    .pill-warn { border-color: #f2c94c; }
+    .pill-danger { border-color: #f0a3c7; }
+    .pill-lilac { border-color: #b9a4e3; }
+    .row-alert { background: #ffe9ee !important; }
+    .row-warn { background: #fff6d6 !important; }
+    .audit-item { border: 2px dashed var(--border-strong); border-radius: 20px; background: #fff; }
+    .audit-item.critical { border-left: 6px solid var(--semantic-danger); }
+    .audit-item.warning { border-left: 6px solid var(--semantic-warn); }
+    .audit-item.info { border-left: 6px solid var(--pink-d); }
+    .empty-banner { border: 3px dashed var(--pink-s); border-radius: 28px; background: #fff; }
+    .empty-banner h3::before { content: "🐰"; display: block; font-size: 44px; animation: bob 2.4s ease-in-out infinite; }
+    .source-status { border-width: 2px !important; }
+    .source-status.source-ok { background: var(--block-mint); color: #14583a; border-color: #6fcfa0; }
+    .source-status.source-fallback { background: #fff3c4; color: #6b3d00; border-color: #f2c94c; }
+    .source-status.source-wait { background: #fff; color: var(--text-muted); border: 2px dashed var(--border-strong); }
+
+    /* ---- โหมดกลางคืน (ปุ่มโหมดมืด) ---- */
+    body.dark { background-image: none; background-color: #2d2142; }
+    body.dark .topbar { background: linear-gradient(135deg, #3b2a58 0%, #4a2f5e 60%, #2f3f66 100%); border-bottom-color: #ff8fb8; }
+    body.dark .topbar::before { background: rgba(255, 255, 255, .08); }
+    body.dark .brand h1 { color: #fff; }
+    body.dark .page-nav, body.dark .mode-switcher-wrap { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.28); box-shadow: none; }
+    body.dark .nav-link, body.dark .mode-btn { color: #fff; }
+    body.dark .nav-link:hover, body.dark .mode-btn:hover { background: rgba(255,255,255,.12); color: #fff; }
+    body.dark .nav-link.active, body.dark .mode-btn.active { background: var(--pink-s); color: #3d1230; }
+    body.dark .btn-pill { color: #3d1230; }
+    body.dark .btn-outline { background: transparent; color: #fff; border-color: rgba(255,255,255,.55); box-shadow: 0 4px 0 rgba(255,255,255,.25); }
+    body.dark .btn-outline:hover { background: rgba(255,255,255,.14); }
+    body.dark .loader-bar, body.dark .empty-banner, body.dark .audit-item { background: rgba(255,255,255,.06); }
+    body.dark .time-bar, body.dark .kpi-card, body.dark .card { background: #382a52; border-color: rgba(255,255,255,.2); box-shadow: 0 5px 0 rgba(0,0,0,.25); }
+    body.dark .input-ctrl, body.dark .select-ctrl, body.dark .preset-btn { background: rgba(255,255,255,.1); color: #fff; border-color: rgba(255,255,255,.35); }
+    body.dark .preset-btn.active { background: var(--pink-s); color: #3d1230; }
+    body.dark .time-label, body.dark .card-title { color: #fff; }
+    body.dark thead th { background: #4b3a72; color: #fff; }
+    body.dark tbody tr:nth-child(even) { background: rgba(255,255,255,.04); }
+    body.dark tbody tr:hover { background: rgba(255,255,255,.1); }
+    body.dark .file-chip { background: rgba(255,255,255,.08); }
+    body.dark .file-chip.loaded { background: rgba(189,240,216,.18); border-color: #6fcfa0; }
+    body.dark .source-status.source-wait { background: rgba(255,255,255,.08); }
+    body.dark .row-alert { background: rgba(255, 143, 184, .22) !important; }
+    body.dark .row-warn { background: rgba(255, 240, 168, .16) !important; }
   </style>
 </head>
 <body>
@@ -749,7 +895,26 @@
     <div class="topbar-inner">
       <div class="topbar-row">
         <div class="brand">
-          <div class="brand-icon">📦</div>
+          <div class="brand-icon">
+          <svg viewBox="0 0 120 120" role="img" aria-label="ตัวการ์ตูนแคปซูลยา" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 24l3 7 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1z" fill="#ffe27a" stroke="#5b3a6b" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M100 86c-5-5-12 2-7 8l7 7 7-7c5-6-2-13-7-8z" fill="#ff8fb8" stroke="#5b3a6b" stroke-width="2" stroke-linejoin="round"/>
+            <g transform="rotate(-16 60 62)">
+              <path d="M34 54V38a26 26 0 0 1 52 0v16z" fill="#ff8fb8"/>
+              <path d="M34 54v22a26 26 0 0 0 52 0V54z" fill="#fff"/>
+              <rect x="34" y="12" width="52" height="100" rx="26" fill="none" stroke="#5b3a6b" stroke-width="4"/>
+              <path d="M34 54h52" stroke="#5b3a6b" stroke-width="3"/>
+              <path d="M60 26v14M53 33h14" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+              <path d="M34 66l-12 8M86 66l12 -8" stroke="#5b3a6b" stroke-width="4" stroke-linecap="round"/>
+              <ellipse cx="50" cy="105" rx="7" ry="4" fill="#ffd34d" stroke="#5b3a6b" stroke-width="2"/>
+              <ellipse cx="70" cy="105" rx="7" ry="4" fill="#ffd34d" stroke="#5b3a6b" stroke-width="2"/>
+              <circle cx="50" cy="68" r="4.5" fill="#4a3558"/><circle cx="70" cy="68" r="4.5" fill="#4a3558"/>
+              <circle cx="51.6" cy="66.4" r="1.5" fill="#fff"/><circle cx="71.6" cy="66.4" r="1.5" fill="#fff"/>
+              <ellipse cx="43" cy="77" rx="5" ry="3" fill="#ffb3d1"/><ellipse cx="77" cy="77" rx="5" ry="3" fill="#ffb3d1"/>
+              <path d="M54 76q6 7 12 0" fill="none" stroke="#4a3558" stroke-width="3" stroke-linecap="round"/>
+            </g>
+          </svg>
+          </div>
           <div>
             <h1 id="app-title">ระบบบริหารคลังยา วันหมดอายุ การสั่งซื้อ และการจ่ายยา</h1>
             <p id="app-subtitle">กำลังโหลดข้อมูลจาก /api/data ...</p>
@@ -1220,19 +1385,19 @@
     };
 
     const PALETTE = {
-      ink: '#000000',
+      ink: '#4a3558',
       canvas: '#ffffff',
-      hairline: '#e6e6e6',
-      hairlineSoft: '#f1f1f1',
-      surfaceSoft: '#f7f7f5',
-      lime: '#dceeb1',
-      lilac: '#c5b0f4',
-      cream: '#f4ecd6',
-      mint: '#c8e6cd',
-      pink: '#efd4d4',
-      coral: '#f3c9b6',
-      navy: '#1f1d3d',
-      pastels: ['#dceeb1', '#c5b0f4', '#f4ecd6', '#c8e6cd', '#efd4d4', '#f3c9b6']
+      hairline: '#f6d3e4',
+      hairlineSoft: '#f9e1ec',
+      surfaceSoft: '#fff3f8',
+      lime: '#e3f6b8',
+      lilac: '#e0d6ff',
+      cream: '#fff0b8',
+      mint: '#bdf0d8',
+      pink: '#ffd0e2',
+      coral: '#ffd2bd',
+      navy: '#2d2142',
+      pastels: ['#ffb3d1', '#e0d6ff', '#fff0b8', '#bdf0d8', '#c9e7ff', '#ffd2bd']
     };
 
     if (window.Chart) {
